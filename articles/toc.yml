@@ -1,2 +1,6 @@
-- name: Introduction
-  href: intro.md
+- name: Server Setup
+  href: setup.md
+- name: Plugin Development
+  href: plugins.md
+- name: Contributing
+  href: contrib.md
