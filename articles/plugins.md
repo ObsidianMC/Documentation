@@ -1,11 +1,14 @@
 # Plugin Development
+**⚠️ Please do take note that this documentation may not be entirely up to date, as the server undergoes a lot of changes regularly. If you stumble upon any issues, feel free to contact us on Discord!**
 
 ## Setup development environment
-You can follow this [guide](https://github.com/ObsidianServer/ObsidianPlugin/blob/main/README.md) to setup your development environment.
 
-TLDR: setup a .NET 5 project that references Obsidian.API
+You can follow this [guide](https://github.com/ObsidianMC/ObsidianPlugin/blob/main/README.md) to setup your development environment.
+
+TLDR: setup a .NET project that references Obsidian.API
 
 ## Writing your first plugin
+
 Here is a sample plugin that you can start with:
 
 ```cs
@@ -28,18 +31,22 @@ public class MyFirstPlugin : PluginBase
 Here is a small breakdown of this sample plugin:
 
 - `using Obsidian.API`: These are your references. Usually you'd only reference `Obsidian.API` and all libraries you want to use.
+
 - `[Plugin]`: This is the Plugin attribute. This attribute also defines a bunch of important info about your plugin:
-	* `Name`: Your plugin's name.
-	* `Version`: Your plugin's version. We recommend using [Semantic Versioning](https://semver.org/).
-	* `Authors`: Who made this plugin. You! :D
-	* `Description`: A description for this plugin, to be listed in Obsidian's `/plugins` command.
+  - `Name`: Your plugin's name.
+  - `Version`: Your plugin's version. We recommend using [Semantic Versioning](https://semver.org/).
+  - `Authors`: Who made this plugin. You! :D
+  - `Description`: A description for this plugin, to be listed in Obsidian's `/plugins` command.
+
 - `: PluginBase`: Your plugin class should implement the `PluginBase` abstract class.
 - `[Inject] public ILogger Logger { get; set; }` This is a service. More about plugin services can be read [here](#Services).
 - `OnLoad(IServer server)`: This is an event. These are not the same as .NET's events, as they are invoked with [Reflection](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/reflection). More about events can be read [here](#Events).
 - `Logger.Log`: This is how you can log messages to the console using the Logger [service](#Services). It is **not** recommended to use the `Console.Write` or `Console.WriteLine` methods, as these _may_ block server threads slowing down Obsidian.
 
 ## Plugin Structure
+
 ### PluginBase
+
 All plugins must derive from the [PluginBase](https://github.com/ObsidianServer/Obsidian/blob/master/Obsidian.API/Plugins/PluginBase.cs) class. This is important for receiving events and making the plugin work as a dependency for other plugins. It is the only requirement.
 
 ```cs
@@ -49,6 +56,7 @@ public class MyFirstPlugin : PluginBase
 ```
 
 ### PluginAttribute
+
 You should add [PluginAttribute](https://github.com/ObsidianServer/Obsidian/blob/master/Obsidian.API/Plugins/PluginAttribute.cs) to provide more information about your plugin.
 
 ```cs
@@ -61,6 +69,7 @@ public class MyFirstPlugin : PluginBase
 You can obtain this information at runtime through the [Info](https://github.com/ObsidianServer/Obsidian/blob/01d1117ea287ebf870d297312187b426e67bd8eb/Obsidian.API/Plugins/PluginBase.cs#L14) property.
 
 ## Events
+
 Plugin classes can contain methods with a specific signature, which will be called when certain events occur on the server.
 
 ```cs
@@ -72,6 +81,7 @@ public async Task OnPlayerJoin(PlayerJoinEventArgs playerJoinEvent)
 ```
 
 ### Currently available events
+
 (_more will be added in the future_)
 
 | Event                 | Arguments                    | Description                                                       |
@@ -91,6 +101,7 @@ At the moment, all events (except for OnLoad) must return a [Task](https://docs.
 If your method doesn't need to be asynchronous, you can return [Task.CompletedTask](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.completedtask?view=net-5.0#System_Threading_Tasks_Task_CompletedTask)
 
 ## Services
+
 Obsidian provides services, each one with specific functionality. If marked with [InjectAttribute](https://github.com/ObsidianServer/Obsidian/blob/master/Obsidian.API/Plugins/InjectAttribute.cs), they are automatically injected when the plugin is loaded.
 
 ```cs
@@ -114,6 +125,7 @@ public class MyFirstPlugin : PluginBase
 _This list is not final, more services will be added in the future._
 
 ### How to use services
+
 If marked with [InjectAttribute](https://github.com/ObsidianServer/Obsidian/blob/master/Obsidian.API/Plugins/InjectAttribute.cs), services are automatically injected when the plugin is loaded. Some services have [IsUsable](https://github.com/ObsidianServer/Obsidian/blob/master/Obsidian.API/Plugins/Services/Common/ISecuredService.cs#L13) property, meaning that they need a certain permission to be used. If you call security-critical method when service isn't usable, a [SecurityException](https://docs.microsoft.com/en-us/dotnet/api/system.security.securityexception?view=net-5.0) will be thrown.
 
 ```cs
@@ -141,7 +153,7 @@ If you want your plugin to run, even though it's missing some permissions, you c
 
 Some methods in secured services are usable even when IsUsable is `false`, because they are not security-critical themselves. You can tell by the "Exceptions:" in method description:
 
-![](/images/secured_service_call.jpg)
+![Example of a secure service call.](/images/secured_service_call.jpg)
 
 ### Permissions list
 
@@ -165,9 +177,12 @@ Plugin dependencies are other loaded plugins, which you can reference and use in
 You can reference plugins by adding a property/field of type [PluginBase](https://github.com/ObsidianServer/Obsidian/blob/master/Obsidian.API/Plugins/PluginBase.cs) and applying [DependencyAttribute](https://github.com/ObsidianServer/Obsidian/blob/master/Obsidian.API/Plugins/DependencyAttribute.cs) onto it. When another plugin is loaded and matches the name of your property/field name, it will be injected automatically.
 
 ```cs
+
 [Dependency]
 public PluginBase AnotherPlugin { get; set; }
+
 ```
+
 _AnotherPlugin is going to be `null`, until plugin named "AnotherPlugin" is loaded._
 
 If you want to name your property/field differently than the target dependency, you can use [AliasAttribute](https://github.com/ObsidianServer/Obsidian/blob/master/Obsidian.API/Plugins/AliasAttribute.cs) as in the example:
@@ -191,11 +206,13 @@ _Don't forget to check optional dependencies for `null`, since their presence is
 Since older versions of plugins may be missing certain functionality that you need, you can set minimal dependency version. All plugins with lower version will be ignored, even if their name matches.
 
 ```cs
+
 [Dependency(MinVersion = "2.0")]
 public PluginBase AnotherPlugin { get; set; }
+
 ```
 
-_The version string should contain major, minor, [build], and [revision] numbers, split by a period character ('.')_
+*The version string should contain major, minor, [build], and [revision] numbers, split by a period character ('.')*
 
 ### How to use dependencies
 
