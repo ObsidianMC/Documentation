@@ -442,29 +442,3 @@ input:checked + .slider:before {
   vertical-align: middle;
 }
 
-@media (min-width: 1600px) {
-  .container {
-    width: 100%;
-  }
-  .sidefilter {
-    width: 18%;
-  }
-  .sidetoc {
-    width: 18%;
-  }
-  .article.grid-right {
-    margin-left: 19%;
-  }
-  .sideaffix {
-    width: 11.5%;
-  }
-  .affix ul>li.active>a {
-    white-space: initial;
-  }
-  .affix ul>li>a {
-    width: 99%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-}
