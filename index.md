@@ -9,21 +9,21 @@ Feel free to join our [Discord](https://discord.gg/gQBtqyXChu) if you're curious
 [![Obsidian Discord](https://discord.com/api/guilds/772894170451804220/embed.png?style=banner2)](https://discord.gg/gQBtqyXChu)
 
 ## 🔧 Setup guide
-A fairly comprehensive setup guide is available [here](/setup.md). This guide goes over how to set up your server either manually or with Docker, and explains most configuration values.
+A fairly comprehensive setup guide is available [here](/articles/setup.html). This guide goes over how to set up your server either manually or with Docker, and explains most configuration values.
 
-**[Setup Guide](/setup.md)**
+**[Setup Guide](/articles/setup.html)**
 
 ## 💻 Contribute
 Contributions are always welcome! 
-Read about how you can contribute [here](/contrib.md). These are some guidelines on what we like to see in contributions (and what not).
+Read about how you can contribute [here](/articles/contrib.html). These are some guidelines on what we like to see in contributions (and what not).
 
-**[Contribution Guidelines](/contrib.md)**
+**[Contribution Guidelines](/articles/contrib.html)**
 
 ## 🔌 Develop plugins
 Plugins are cool! Wanna make them yourself?
-Find out about plugin development [here](/plugins.md). As of right now, plugins are at a very early stage, and are extremely likely to change. This guide may or may not be up to date.
+Find out about plugin development [here](/articles/plugins.html). As of right now, plugins are at a very early stage, and are extremely likely to change. This guide may or may not be up to date.
 
-**[Plugin Development](/plugins.md)**
+**[Plugin Development](/articles/plugins.html)**
 
 ## 🔗 Useful links
 - Github Repository: **[Link](https://github.com/ObsidianMC/Obsidian)**
