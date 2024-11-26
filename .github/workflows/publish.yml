@@ -1,9 +1,13 @@
 name: .NET Docs
 on:
+  repository_dispatch:
+    types: [trigger-workflow]
   workflow_dispatch:
   push:
     paths:
-      - "./**"
+      - "./dockfx.json"
+      - "toc.yml"
+      - "./**/*.md"
 
 env:
   DOTNET_NOLOGO: true
@@ -25,7 +29,7 @@ jobs:
         run: dotnet tool update -g docfx
         continue-on-error: true
       - name: Build Obsidian
-        run: dotnet build ./_obsidian/Obsidian.API/ -c Release 
+        run: dotnet build ./_obsidian/Obsidian.API/ -c Release
       - name: Build documentation
         run: docfx ./docfx.json
       - name: Upload GitHub Pages artifact
