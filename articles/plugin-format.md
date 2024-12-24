@@ -7,11 +7,12 @@ The OBBY plugin format is inspired by the tModLoader mod format. It is a binary 
 ## File Description
 
 ### Binary Format Details
-| Data Type  | Description                                                                                     | Encoding Details                                                                 |
-| **String** | Encoded in UTF-8, length-prefixed. Strings are used for various textual data within the plugin. | UTF-8 encoding, length-prefixed.                                                |
-| **Int32**  | 4 bytes, little-endian order. This data type is used for numerical values such as sizes and counts. | 4 bytes, little-endian.                                                          |
-| **Boolean**| 1 byte, `0x00` for false, `0x01` for true. Booleans are used for flags and binary states.        | 1 byte (`0x00` for false, `0x01` for true).                                      |
-| **Byte array** | Raw binary data, length specified by context. Byte arrays are used for storing raw data such as file contents and hashes. | Variable length, raw binary data.                                                |
+| Data Type    | Description                                                                                     | Encoding Details                        |
+|--------------|-------------------------------------------------------------------------------------------------|-----------------------------------------|
+| **String**   | Encoded in UTF-8, length-prefixed. Strings are used for various textual data within the plugin. | UTF-8 encoding, length-prefixed.        |
+| **Int32**    | 4 bytes, little-endian order. This data type is used for numerical values such as sizes and counts. | 4 bytes, little-endian.                 |
+| **Boolean**  | 1 byte, `0x00` for false, `0x01` for true. Booleans are used for flags and binary states.        | 1 byte (`0x00` for false, `0x01` for true). |
+| **Byte array** | Raw binary data, length specified by context. Byte arrays are used for storing raw data such as file contents and hashes. | Variable length, raw binary data.       |
 
 ### File Layout
 
