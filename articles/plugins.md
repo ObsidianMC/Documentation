@@ -1,5 +1,6 @@
 # Plugin Development
-**⚠️ Please do take note that this documentation may not be entirely up to date, as the server undergoes a lot of changes regularly. If you stumble upon any issues, feel free to contact us on Discord!**
+> [!WARNING]
+> ⚠️ Please do take note that this documentation may not be entirely up to date, as the server undergoes a lot of changes regularly. If you stumble upon any issues, feel free to contact us on Discord!
 
 ## Setup development environment
 

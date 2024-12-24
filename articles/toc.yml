@@ -2,5 +2,7 @@
   href: setup.md
 - name: Plugin Development
   href: plugins.md
+- name: .Obby Plugin Format
+  href: plugin-format.md
 - name: Contributing
   href: contrib.md
